@@ -1,8 +1,13 @@
+// ============================================================================
+// FOREST KEEPER - INTERACTIVE MAP SYSTEM
+// Complete JavaScript Code - Fully Revised
+// ============================================================================
+
 document.addEventListener('DOMContentLoaded', () => {
-    // ========================
-    // INITIALIZATION
-    // ========================
-    console.log('Forest Keeper - About Page Initialized');
+    console.log('🌿 Forest Keeper - Interactive Map System Initialized');
+    
+    // Initialize global variable for popup navigation
+    window.currentLink = "";
     
     // ========================
     // FLOATING LEAVES ANIMATION
@@ -32,31 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             leavesContainer.appendChild(leaf);
         }
-    }
-
-    // ========================
-    // RAIN EFFECT
-    // ========================
-    function createRainEffect() {
-        const hero = document.querySelector('.about-hero');
-        if (!hero) return;
-        
-        for (let i = 0; i < 30; i++) {
-            const drop = document.createElement('div');
-            drop.className = 'raindrop';
-            
-            const left = Math.random() * 100;
-            const duration = Math.random() * 1 + 0.5;
-            const delay = Math.random() * 2;
-            
-            drop.style.cssText = `
-                left: ${left}%;
-                animation-duration: ${duration}s;
-                animation-delay: ${delay}s;
-            `;
-            
-            hero.appendChild(drop);
-        }
+        console.log('✅ Floating leaves animation created');
     }
 
     // ========================
@@ -94,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             observer.observe(counter);
         });
+        console.log('✅ Stats counter animation initialized');
     }
 
     // ========================
@@ -119,14 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 backToTop.classList.remove('show');
             }
-            
-            // Parallax effect for hero
-            const hero = document.querySelector('.about-hero');
-            if (hero) {
-                const scrolled = window.scrollY;
-                const rate = scrolled * 0.5;
-                hero.style.backgroundPosition = `center ${rate}px`;
-            }
         });
         
         backToTop.addEventListener('click', () => {
@@ -135,6 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 behavior: 'smooth'
             });
         });
+        
+        console.log('✅ Scroll effects initialized');
     }
 
     // ========================
@@ -163,6 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 500);
             }
         }, 2000);
+        
+        console.log('✅ Page load animation initialized');
     }
 
     // ========================
@@ -172,14 +150,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const mapImages = document.querySelectorAll('.map img');
         const mapContainer = document.querySelector('.map');
         
-        if (!mapImages.length || !mapContainer) return;
+        if (!mapImages.length || !mapContainer) {
+            console.warn('⚠️ Map elements not found');
+            return;
+        }
         
-        // Add interactive class to all map images
+        console.log(`🗺️ Found ${mapImages.length} interactive islands`);
+        
+        // Add interactive class and cursor to all map images
         mapImages.forEach(img => {
             img.classList.add('interactive-hover');
+            img.style.cursor = 'pointer';
         });
         
         mapImages.forEach(img => {
+            const pulauName = img.getAttribute('data-pulau');
+            console.log(`🏝️ Setting up island: ${pulauName}`);
+            
+            // Mouse Enter - Show hover effects
             img.addEventListener('mouseenter', (event) => {
                 img.style.filter = 'drop-shadow(0 0 20px rgba(76, 175, 80, 0.7)) brightness(1.2)';
                 img.classList.add('pulse');
@@ -188,9 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 mapContainer.style.boxShadow = '0 0 30px rgba(76, 175, 80, 0.4)';
                 mapContainer.style.borderColor = 'rgba(76, 175, 80, 0.6)';
                 
-                showMapTooltip(event, img.getAttribute('data-pulau'));
+                showMapTooltip(event, pulauName);
             });
             
+            // Mouse Leave - Remove hover effects
             img.addEventListener('mouseleave', () => {
                 img.style.filter = 'drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3)) brightness(1)';
                 img.classList.remove('pulse');
@@ -202,7 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 removeMapTooltip();
             });
             
-            img.addEventListener('click', function() {
+            // Click Event - Show popup and navigate
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                console.log(`🖱️ Island clicked: ${pulauName}`);
+                
+                // Pulse animation
                 this.style.animation = 'pulse 0.5s';
                 setTimeout(() => {
                     this.style.animation = '';
@@ -214,35 +209,57 @@ document.addEventListener('DOMContentLoaded', () => {
                     mapContainer.style.transform = 'scale(1)';
                 }, 200);
                 
-                // Show popup
-                const pulauName = this.getAttribute('data-pulau');
+                // Map island names to their corresponding HTML pages
                 let link = '';
                 
                 switch(pulauName) {
-                    case 'Sumatera': link = 'sumatera.html'; break;
-                    case 'Sulawesi': link = 'Sulawesi.html'; break;
-                    case 'Kalimantan': link = 'Kalimantan.html'; break;
-                    case 'Jawa': link = 'Jawa.html'; break;
-                    case 'Nusa Tenggara': link = 'nusa-tenggara.html'; break;
-                    case 'Papua': link = 'Papua.html'; break;
+                    case 'Sumatra': 
+                    case 'Sumatera': 
+                        link = 'sumatera.html'; 
+                        break;
+                    case 'Sulawesi': 
+                        link = 'Sulawesi.html'; 
+                        break;
+                    case 'Kalimantan': 
+                        link = 'Kalimantan.html'; 
+                        break;
+                    case 'Jawa': 
+                        link = 'Jawa.html'; 
+                        break;
+                    case 'Nusa Tenggara': 
+                        link = 'nusa-tenggara.html'; 
+                        break;
+                    case 'Papua': 
+                        link = 'Papua.html'; 
+                        break;
+                    default:
+                        console.warn(`⚠️ No link mapping for: ${pulauName}`);
                 }
                 
                 if (link) {
+                    console.log(`✅ Opening popup for ${pulauName} → ${link}`);
                     showPopup(link, pulauName);
+                } else {
+                    console.error(`❌ No link found for island: ${pulauName}`);
+                    alert(`Halaman untuk ${pulauName} belum tersedia.`);
                 }
             });
         });
+        
+        console.log('✅ Interactive map initialized successfully');
     }
 
     // ========================
-    // MAP TOOLTIP
+    // MAP TOOLTIP SYSTEM
     // ========================
     function showMapTooltip(event, pulauName) {
+        // Remove existing tooltip if any
         const existingTooltip = document.querySelector('.peta-tooltip');
         if (existingTooltip) {
             existingTooltip.remove();
         }
         
+        // Create new tooltip
         const tooltip = document.createElement('div');
         tooltip.className = 'peta-tooltip';
         tooltip.textContent = `Pulau ${pulauName}`;
@@ -266,6 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.body.appendChild(tooltip);
         
+        // Update tooltip position
         const updateTooltip = () => {
             const rect = event.target.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
@@ -295,7 +313,98 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ========================
-    // CUSTOM SLIDER
+    // POPUP MODAL SYSTEM
+    // ========================
+    function initPopup() {
+        const popup = document.getElementById('popup');
+        const popupText = document.getElementById('popup-text');
+        const btnKunjungi = document.getElementById('kunjungi');
+        const btnTutup = document.getElementById('tutup');
+        
+        if (!popup || !popupText || !btnKunjungi || !btnTutup) {
+            console.warn('⚠️ Popup elements not found');
+            return;
+        }
+        
+        console.log('🔔 Popup system initialized');
+        
+        // Button "Kunjungi" - Navigate to island page
+        btnKunjungi.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log(`🚀 Navigating to: ${window.currentLink}`);
+            
+            if (window.currentLink) {
+                // Close animation
+                popup.style.opacity = '0';
+                popup.querySelector('.popup-box').style.transform = 'scale(0.8)';
+                
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                    // Navigate to the selected island page
+                    window.location.href = window.currentLink;
+                }, 300);
+            } else {
+                console.error('❌ No link available');
+                alert('Terjadi kesalahan. Link tidak tersedia.');
+            }
+        });
+        
+        // Hover effect for Kunjungi button
+        btnKunjungi.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px) scale(1.05)';
+            this.style.boxShadow = '0 10px 25px rgba(42, 92, 57, 0.5)';
+        });
+        
+        btnKunjungi.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+            this.style.boxShadow = '0 5px 15px rgba(42, 92, 57, 0.3)';
+        });
+        
+        // Button "Batal" - Close popup
+        btnTutup.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('❌ Popup cancelled');
+            
+            popup.style.opacity = '0';
+            popup.querySelector('.popup-box').style.transform = 'scale(0.8)';
+            
+            setTimeout(() => {
+                popup.style.display = 'none';
+                window.currentLink = "";
+            }, 300);
+        });
+        
+        // Hover effect for Tutup button
+        btnTutup.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px) scale(1.05)';
+            this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.5)';
+        });
+        
+        btnTutup.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+        });
+        
+        // Click outside popup to close
+        popup.addEventListener('click', function(e) {
+            if (e.target === this) {
+                console.log('❌ Popup closed by clicking outside');
+                
+                popup.style.opacity = '0';
+                popup.querySelector('.popup-box').style.transform = 'scale(0.8)';
+                
+                setTimeout(() => {
+                    this.style.display = 'none';
+                    window.currentLink = "";
+                }, 300);
+            }
+        });
+        
+        console.log('✅ Popup event listeners attached');
+    }
+
+    // ========================
+    // CUSTOM SLIDER SYSTEM
     // ========================
     function initCustomSlider() {
         const next = document.querySelector('.next');
@@ -318,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Add click handlers to all "Lihat Detail" buttons
+        // Add click handlers to "See More" buttons
         const seeMoreButtons = document.querySelectorAll('.content button');
         seeMoreButtons.forEach((button, index) => {
             button.addEventListener('click', (e) => {
@@ -326,92 +435,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.stopPropagation();
                 showDetailModal(index);
                 
-                // Button click effect
                 button.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     button.style.transform = 'scale(1)';
                 }, 200);
             });
         });
-    }
-
-    // ========================
-    // PULAU CARD INTERACTIONS
-    // ========================
-    function initPulauCardInteractions() {
-        const pulauCards = document.querySelectorAll('.pulau-card');
         
-        pulauCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-10px) scale(1.02)';
-                card.style.boxShadow = '0 20px 40px rgba(42, 92, 57, 0.4)';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0) scale(1)';
-                card.style.boxShadow = 'none';
-            });
-            
-            const button = card.querySelector('.pulau-btn');
-            if (button) {
-                button.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    // Button click effect
-                    button.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        button.style.transform = 'scale(1)';
-                    }, 200);
-                });
-            }
-        });
-    }
-
-    // ========================
-    // POPUP FUNCTIONALITY
-    // ========================
-    function initPopup() {
-        const popup = document.getElementById('popup');
-        const popupText = document.getElementById('popup-text');
-        const btnKunjungi = document.getElementById('kunjungi');
-        const btnTutup = document.getElementById('tutup');
-        
-        if (!popup || !popupText || !btnKunjungi || !btnTutup) return;
-        
-        window.currentLink = "";
-        
-        btnKunjungi.addEventListener('click', function() {
-            if (window.currentLink) {
-                popup.style.opacity = '0';
-                popup.querySelector('.popup-box').style.transform = 'scale(0.8)';
-                
-                setTimeout(() => {
-                    popup.style.display = 'none';
-                    window.location.href = window.currentLink;
-                }, 300);
-            }
-        });
-        
-        btnTutup.addEventListener('click', function() {
-            popup.style.opacity = '0';
-            popup.querySelector('.popup-box').style.transform = 'scale(0.8)';
-            
-            setTimeout(() => {
-                popup.style.display = 'none';
-                window.currentLink = "";
-            }, 300);
-        });
-        
-        popup.addEventListener('click', function(e) {
-            if (e.target === this) {
-                popup.style.opacity = '0';
-                popup.querySelector('.popup-box').style.transform = 'scale(0.8)';
-                
-                setTimeout(() => {
-                    this.style.display = 'none';
-                    window.currentLink = "";
-                }, 300);
-            }
-        });
+        console.log('✅ Custom slider initialized');
     }
 
     // ========================
@@ -425,8 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const linkPage = link.getAttribute('href');
             
             if (linkPage === currentPage || 
-                (currentPage === '' && linkPage === 'index.html') ||
-                (currentPage === 'about.html' && linkPage === 'about.html')) {
+                (currentPage === '' && linkPage === 'index.html')) {
                 link.classList.add('active');
             }
             
@@ -442,121 +472,118 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+        
+        console.log('✅ Navigation initialized');
     }
 
     // ========================
-    // DARK MODE TOGGLE
+    // SWIPER CARD SLIDER
     // ========================
-    function initDarkModeToggle() {
-        const darkModeToggle = document.createElement('button');
-        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        darkModeToggle.id = 'darkModeToggle';
-        darkModeToggle.style.cssText = `
-            position: fixed;
-            bottom: 90px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #2a5c39;
-            color: white;
-            border: none;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        `;
+    function initSwiper() {
+        const swiperContainer = document.querySelector('.swiper-wrapper');
+        if (!swiperContainer) return;
         
-        document.body.appendChild(darkModeToggle);
-        
-        darkModeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const icon = darkModeToggle.querySelector('i');
-            if (document.body.classList.contains('dark-mode')) {
-                icon.className = 'fas fa-sun';
-                darkModeToggle.style.background = '#f1c40f';
-                darkModeToggle.style.color = '#333';
-            } else {
-                icon.className = 'fas fa-moon';
-                darkModeToggle.style.background = '#2a5c39';
-                darkModeToggle.style.color = 'white';
+        const swiper = new Swiper('.slider-wrapper', {
+            loop: true,
+            grabCursor: true,
+            spaceBetween: 30,
+            
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true
+            },
+            
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            },
+            
+            breakpoints: {
+                0: {
+                    slidesPerView: 1
+                },
+                768: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
+                }
             }
         });
-    }
-
-    // ========================
-    // ADDITIONAL ANIMATIONS
-    // ========================
-    function addAnimations() {
-        // Add glow effect to important headings
-        document.querySelectorAll('.logo, .hero-title, .section-title h2, .judul h2').forEach(el => {
-            el.classList.add('text-glow');
-        });
         
-        // Add fade-in animation to cards
-        const cards = document.querySelectorAll('.pulau-card, .stat-item');
-        cards.forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, 100 + (index * 100));
-        });
+        console.log('✅ Swiper card slider initialized');
     }
 
     // ========================
     // INITIALIZE ALL FEATURES
     // ========================
     function initializeAll() {
+        console.log('🚀 Starting initialization...');
+        
         createFloatingLeaves();
-        createRainEffect();
         animateCounters();
         initScrollEffects();
         initPageLoad();
         enhanceMapInteractions();
         initCustomSlider();
-        initPulauCardInteractions();
         initPopup();
         initNavigation();
-        initDarkModeToggle();
-        addAnimations();
+        initSwiper();
         
-        console.log('All features initialized successfully');
+        console.log('✅ All features initialized successfully!');
+        console.log('🌿 Forest Keeper Interactive Map is ready!');
     }
     
     // Start initialization
     initializeAll();
 });
 
-// ========================
+// ============================================================================
 // GLOBAL FUNCTIONS
-// ========================
+// ============================================================================
 
-let currentLink = "";
-
+/**
+ * Show popup modal for island navigation
+ * @param {string} link - URL to navigate to
+ * @param {string} namaPulau - Name of the island
+ */
 function showPopup(link, namaPulau) {
-    currentLink = link;
-    const namaLengkap = namaPulau;
+    console.log(`📢 showPopup called with link: ${link}, island: ${namaPulau}`);
     
-    document.getElementById('popup-text').textContent = 
-        `Apakah Anda ingin mengunjungi halaman Pulau ${namaLengkap}?`;
+    // Store the link globally so it can be accessed by the button
+    window.currentLink = link;
+    
+    // Normalize the island name for display
+    const namaLengkap = namaPulau === 'Sumatra' || namaPulau === 'Sumatera' ? 'Sumatra' : namaPulau;
     
     const popup = document.getElementById('popup');
-    popup.style.display = 'flex';
+    const popupText = document.getElementById('popup-text');
     
+    if (!popup || !popupText) {
+        console.error('❌ Popup elements not found!');
+        return;
+    }
+    
+    popupText.textContent = `Apakah Anda ingin mengunjungi halaman Pulau ${namaLengkap}?`;
+    
+    popup.style.display = 'flex';
+    popup.style.opacity = '0';
+    popup.querySelector('.popup-box').style.transform = 'scale(0.8)';
+    
+    // Trigger animation
     setTimeout(() => {
         popup.style.opacity = '1';
         popup.querySelector('.popup-box').style.transform = 'scale(1)';
     }, 10);
+    
+    console.log('✅ Popup displayed successfully');
 }
 
+/**
+ * Show detailed modal for species information
+ * @param {number} index - Index of the species
+ */
 function showDetailModal(index) {
     const speciesData = [
         {
@@ -600,6 +627,20 @@ function showDetailModal(index) {
             habitat: "Pegunungan Jawa",
             conservation: "Protected",
             fact: "Disebut 'bunga abadi' karena bisa bertahan lama tanpa layu."
+        },
+        {
+            name: "Bekantan",
+            description: "Primata endemik Kalimantan dengan hidung panjang yang khas.",
+            habitat: "Hutan mangrove Kalimantan",
+            conservation: "Endangered",
+            fact: "Jantan memiliki hidung yang sangat besar untuk menarik betina."
+        },
+        {
+            name: "Kantong Semar",
+            description: "Tumbuhan karnivora yang menangkap serangga.",
+            habitat: "Hutan hujan Kalimantan",
+            conservation: "Various (some endangered)",
+            fact: "Menggunakan kantong berisi cairan untuk mencerna mangsa."
         }
     ];
     
@@ -659,12 +700,13 @@ function showDetailModal(index) {
     });
 }
 
-// ========================
-// ADDITIONAL CSS ANIMATIONS (injected via JavaScript)
-// ========================
+// ============================================================================
+// ADDITIONAL CSS ANIMATIONS (Injected via JavaScript)
+// ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
     const style = document.createElement('style');
     style.textContent = `
+        /* Tooltip Animation */
         @keyframes tooltipFadeIn {
             from {
                 opacity: 0;
@@ -676,6 +718,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
+        /* Pulse Animation */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        /* Species Modal Styles */
         .species-modal {
             position: fixed;
             top: 0;
@@ -719,7 +776,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         .species-modal .close-modal:hover {
             color: white;
-            transform: scale(1.2);
+            transform: scale(1.2) rotate(90deg);
         }
         
         .species-modal h2 {
@@ -762,6 +819,7 @@ document.addEventListener('DOMContentLoaded', () => {
             box-shadow: 0 10px 20px rgba(42, 92, 57, 0.3);
         }
         
+        /* Tooltip Arrow */
         .peta-tooltip::after {
             content: '';
             position: absolute;
@@ -773,20 +831,54 @@ document.addEventListener('DOMContentLoaded', () => {
             border-color: #2a5c39 transparent transparent transparent;
         }
         
-        .text-glow {
-            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5),
-                         0 0 20px rgba(76, 175, 80, 0.3),
-                         0 0 30px rgba(76, 175, 80, 0.1);
-        }
-        
+        /* Interactive Hover Effects */
         .interactive-hover {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
         
         .interactive-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(42, 92, 57, 0.3);
+        }
+        
+        /* Loading Animation */
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2a5c39, #4caf50);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(42, 92, 57, 0.3);
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(42, 92, 57, 0.5);
         }
     `;
     document.head.appendChild(style);
+    
+    console.log('✅ Additional CSS animations injected');
 });
