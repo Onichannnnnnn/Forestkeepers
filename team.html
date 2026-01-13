@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical"
+    href="[https://forestkeepers.free.nf/](https://forestkeepers.free.nf/team.html/)"/>
+    <title>Our Team - Forest Keepers</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ========================
+           VARIABLES FOR CONSISTENT THEME
+        ======================== */
+        :root {
+          --primary-green: #2a5c39;
+          --secondary-green: #4caf50;
+          --accent-green: #8bc34a;
+          --dark-bg: #0a1a0a;
+          --light-bg: #f8fff8;
+          --text-light: #ffffff;
+          --text-dark: #1a2c1a;
+          --shadow-color: rgba(42, 92, 57, 0.3);
+          --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+          --border-radius: 16px;
+          --container-padding: 20px;
+        }
+
+        /* ========================
+           RESET & BASE
+        ======================== */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        /* ========================
+           LOADING ANIMATION
+        ======================== */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top: 4px solid var(--secondary-green);
+            border-bottom: 4px solid var(--accent-green);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ========================
+           FLOATING LEAVES
+        ======================== */
+        .floating-leaves {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            top: 0;
+            left: 0;
+        }
+
+        .leaf {
+            position: absolute;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234CAF50"><path d="M12 2L4 12L12 22L20 12L12 2Z"/></svg>');
+            background-size: contain;
+            opacity: 0.3;
+            animation: floatLeaf 15s linear infinite;
+        }
+
+        @keyframes floatLeaf {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ========================
+           ENHANCED HEADER
+        ======================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(10, 26, 10, 0.95) 0%, transparent 100%);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(76, 175, 80, 0.1);
+        }
+
+        header.scrolled {
+            background: rgba(10, 26, 10, 0.98);
+            padding: 15px 100px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 2.2em;
+            background: linear-gradient(45deg, #fff, #4caf50);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+            letter-spacing: 1px;
+            position: relative;
+            user-select: none;
+        }
+
+        .logo::after {
+            content: '🌿';
+            margin-left: 10px;
+            font-size: 1.5em;
+        }
+
+        .navbar a {
+            position: relative;
+            font-size: 1.1em;
+            color: var(--text-light);
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            transition: var(--transition);
+            border-radius: 25px;
+        }
+
+        .navbar a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--secondary-green), transparent);
+            transition: var(--transition);
+        }
+
+        .navbar a:hover::before {
+            width: 100%;
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            color: var(--accent-green);
+        }
+
+        /* ========================
+           ENHANCED HERO SECTION (TEAM VERSION)
+        ======================== */
+        .team-hero {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('Assets/lush-forest-canopy-view-from.jpg') no-repeat center / cover;
+            background-attachment: fixed;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 3.5em;
+            font-weight: 800;
+            background: linear-gradient(45deg, #fff, var(--accent-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-description {
+            font-size: 1.2em;
+            color: var(--text-light);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* ========================
+           TEAM SECTION
+        ======================== */
+        .team-section {
+            padding: 100px 0;
+            background: var(--dark-bg);
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h1 {
+            font-size: 3em;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--accent-green);
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        /* ========================
+           TEAM GRID
+        ======================== */
+        .team-grid {
+            display: grid;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        @media (max-width: 768px) { 
+            .team-grid { grid-template-columns: 1fr; } 
+        }
+        @media (min-width: 769px) and (max-width: 1199px) { 
+            .team-grid { grid-template-columns: repeat(2, 1fr); } 
+        }
+        @media (min-width: 1200px) { 
+            .team-grid { grid-template-columns: repeat(4, 1fr); } 
+        }
+
+        /* ========================
+           TEAM CARD STYLES (ENHANCED)
+        ======================== */
+        .team-card {
+            background: linear-gradient(145deg, rgba(42, 92, 57, 0.1), rgba(10, 26, 10, 0.8));
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease-out forwards;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: var(--accent-green);
+            box-shadow: 0 30px 60px var(--shadow-color);
+        }
+
+        /* Team Member Photo */
+        .team-photo {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--secondary-green);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        .team-card:hover .team-photo {
+            border-color: var(--accent-green);
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-card:hover .team-photo img {
+            transform: scale(1.15);
+        }
+
+        /* Team Member Info */
+        .team-card h3 {
+            color: var(--text-light);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            background: linear-gradient(45deg, #fff, var(--accent-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .team-id {
+            color: var(--accent-green);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .team-role {
+            color: #b8e6b8;
+            font-size: 0.85rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ========================
+           TEAM STATISTICS (ENHANCED)
+        ======================== */
+        .team-stats {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0a290a 100%);
+            margin: 60px 0;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .stat-item {
+            background: linear-gradient(145deg, rgba(42, 92, 57, 0.1), rgba(10, 26, 10, 0.8));
+            backdrop-filter: blur(10px);
+            padding: 40px 20px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-green);
+            box-shadow: 0 20px 40px var(--shadow-color);
+        }
+
+        .stat-number {
+            font-size: 3.5em;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent-green), var(--secondary-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2em;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        /* ========================
+           ENHANCED FOOTER
+        ======================== */
+        .footer-section {
+            background: linear-gradient(180deg, #0a290a 0%, #051d05 100%);
+            color: #fff;
+            padding: 60px 0 20px;
+            position: relative;
+            overflow: hidden;
+            border-top: 3px solid #2a5c39;
+        }
+
+        .footer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2a5c39, transparent);
+        }
+
+        .footer-section::after {
+            content: '🌿';
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 2rem;
+            opacity: 0.1;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Footer Main Section */
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo-section {
+            padding-right: 20px;
+        }
+
+        .footer-logo {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-tagline {
+            color: #b8e6b8;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            max-width: 300px;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-icon:hover {
+            background: var(--secondary-green);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(42, 92, 57, 0.3);
+        }
+
+        /* Footer Links */
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .link-column h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-green);
+            position: relative;
+        }
+
+        .link-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary-green);
+        }
+
+        .link-column ul {
+            list-style: none;
+        }
+
+        .link-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .link-column ul li a {
+            color: #b8e6b8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .link-column ul li a:hover {
+            color: #fff;
+            padding-left: 5px;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #b8e6b8;
+            margin-bottom: 15px;
+        }
+
+        .contact-info i {
+            color: var(--secondary-green);
+            width: 20px;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            margin-top: 30px;
+        }
+
+        .footer-partners {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .partner-text {
+            color: #b8e6b8;
+            font-weight: 500;
+        }
+
+        .partner-logos {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .partner-logo {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: #b8e6b8;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin: 20px 0;
+            color: #b8e6b8;
+        }
+
+        .footer-copyright p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer-legal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal a {
+            color: #b8e6b8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: #fff;
+        }
+
+        .footer-legal span {
+            color: var(--secondary-green);
+            font-weight: bold;
+        }
+
+        .footer-developed {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #b8e6b8;
+            font-size: 0.9rem;
+        }
+
+        .footer-developed strong a {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* ========================
+           BACK TO TOP BUTTON
+        ======================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px var(--shadow-color);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        /* ========================
+           CUSTOM SCROLLBAR
+        ======================== */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary-green), var(--secondary-green));
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--secondary-green), var(--accent-green));
+        }
+
+        /* ========================
+           LAZY LOAD IMAGES
+        ======================== */
+        .lazy-image {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lazy-image.loaded {
+            opacity: 1;
+        }
+
+        /* ========================
+           NOSCRIPT STYLES
+        ======================== */
+        .no-js .loading {
+            display: none;
+        }
+
+        .no-js body {
+            opacity: 1;
+        }
+
+        /* ========================
+           TEXT GLOW EFFECT
+        ======================== */
+        .text-glow {
+            text-shadow: 
+                0 0 10px rgba(76, 175, 80, 0.5),
+                0 0 20px rgba(76, 175, 80, 0.3),
+                0 0 30px rgba(76, 175, 80, 0.1);
+        }
+
+        /* ========================
+           RESPONSIVE DESIGN
+        ======================== */
+
+        /* Responsive untuk Tablet (1024px) */
+        @media (max-width: 1024px) {
+            header {
+                padding: 20px 5%;
+            }
+            
+            .hero-title {
+                font-size: 2.8em;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Footer Responsive */
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-logo-section {
+                text-align: center;
+                padding-right: 0;
+            }
+            
+            .footer-tagline {
+                max-width: 100%;
+                margin: 0 auto 25px;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Responsive untuk Mobile (768px) */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 20px;
+                position: relative;
+            }
+            
+            header.scrolled {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 1.8em;
+            }
+            
+            .navbar {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .navbar a {
+                margin: 0 5px;
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            
+            .hero-title {
+                font-size: 2.2em;
+            }
+            
+            .hero-description {
+                font-size: 1em;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-photo {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .team-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            /* Footer Responsive */
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-partners {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .partner-logos {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .footer-legal {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Responsive untuk Mobile Kecil (480px) */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8em;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-photo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .team-card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-number {
+                font-size: 2.5em;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        /* ========================
+           ANIMATIONS
+        ======================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer-content > * {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .footer-logo-section { animation-delay: 0.1s; }
+        .footer-links { animation-delay: 0.2s; }
+        .footer-bottom { animation-delay: 0.3s; }
+    </style>
+</head>
+
+<body class="no-js">
+    <!-- Loading Screen -->
+    <div class="loading" id="loadingScreen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Floating Leaves Background -->
+    <div class="floating-leaves" id="floatingLeaves"></div>
+
+    <!-- Header -->
+    <header>
+        <h2 class="logo">Forest Keepers</h2>
+        <nav class="navbar">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+            <a href="team.html" class="active"><i class="fas fa-users"></i> Team</a>
+            <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="team-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">TIM KAMI</h1>
+            <p class="hero-description">Para Pencinta Alam yang Berdedikasi untuk Pelestarian Keanekaragaman Hayati Indonesia</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="team-section">
+        <div class="team-container">
+            <!-- Team Members -->
+            <div class="section-header">
+                <h1>Anggota Tim</h1>
+                <p>Kenali para individu yang berdedikasi menjaga kelestarian alam Indonesia</p>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Member 1 -->
+                <div class="team-card" style="animation-delay: 0.1s">
+                    <div class="team-photo">
+                        <img class="lazy-image" 
+                             src="Assets/foto_tracy.jpeg" 
+                             alt="Tracy C Simanjuntak"
+                             loading="lazy"
+                             onload="this.classList.add('loaded')">
+                    </div>
+                    <h3>Tracy C Simanjuntak</h3>
+                    <span class="team-id">NIM: 202431143</span>
+                </div>
+
+                <!-- Member 2 -->
+                <div class="team-card" style="animation-delay: 0.2s">
+                    <div class="team-photo">
+                        <img class="lazy-image" 
+                             src="Assets/foto_fitriya1.jpeg" 
+                             alt="Fitrya Irfan"
+                             loading="lazy"
+                             onload="this.classList.add('loaded')">
+                    </div>
+                    <h3>Fitrya Irfan</h3>
+                    <span class="team-id">NIM: 202431073</span>
+                </div>
+
+                <!-- Member 3 -->
+                <div class="team-card" style="animation-delay: 0.3s">
+                    <div class="team-photo">
+                        <img class="lazy-image" 
+                             src="Assets/foto_Egi.jpeg" 
+                             alt="Egi Vioneuva Pradana"
+                             loading="lazy"
+                             onload="this.classList.add('loaded')">
+                    </div>
+                    <h3>Egi Vioneuva Pradana</h3>
+                    <span class="team-id">NIM: 202431060</span>
+                </div>
+
+                <!-- Member 4 -->
+                <div class="team-card" style="animation-delay: 0.4s">
+                    <div class="team-photo">
+                        <img class="lazy-image" 
+                             src="Assets/foto_indi.jpeg" 
+                             alt="Indi Nurlistiani Ali"
+                             loading="lazy"
+                             onload="this.classList.add('loaded')">
+                    </div>
+                    <h3>Indi Nurlistiani Ali</h3>
+                    <span class="team-id">NIM: 202431190</span>
+                </div>
+            </div>
+
+            <!-- Team Statistics -->
+            <div class="team-stats">
+                <div class="section-header">
+                    <h1>Statistik Tim</h1>
+                    <p>Kontribusi kami dalam pelestarian keanekaragaman hayati Indonesia</p>
+                </div>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="6">0</div>
+                        <div class="stat-label">Pulau Dijelajahi</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="34">0</div>
+                        <div class="stat-label">Spesies Dilindungi</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="100">0</div>
+                        <div class="stat-label">Jam Penelitian</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="4">0</div>
+                        <div class="stat-label">Anggota Tim</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-logo-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-leaf"></i> Forest Keepers
+                    </div>
+                    <p class="footer-tagline">
+                        Bersama menjaga keanekaragaman hayati Indonesia untuk generasi mendatang.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="link-column">
+                        <h3>Navigasi</h3>
+                        <ul>
+                            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                            <li><a href="about.html"><i class="fas fa-chevron-right"></i> Tentang</a></li>
+                            <li><a href="team.html"><i class="fas fa-chevron-right"></i> Tim</a></li>
+                            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Kontak</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h3>Pulau yang Kami Teliti</h3>
+                        <ul>
+                            <li><a href="sumatera.html"><i class="fas fa-chevron-right"></i> Sumatera</a></li>
+                            <li><a href="jawa.html"><i class="fas fa-chevron-right"></i> Jawa</a></li>
+                            <li><a href="kalimantan.html"><i class="fas fa-chevron-right"></i> Kalimantan</a></li>
+                            <li><a href="sulawesi.html"><i class="fas fa-chevron-right"></i> Sulawesi</a></li>
+                            <li><a href="nusatenggara.html"><i class="fas fa-chevron-right"></i> Nusa Tenggara</a></li>
+                            <li><a href="papua.html"><i class="fas fa-chevron-right"></i> Papua</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2026 Forest Keepers. Hak Cipta Dilindungi. Dibuat dengan ❤️ untuk Indonesia.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // ========================
+        // INITIALIZATION
+        // ========================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Team Page Initialized');
+            
+            // Remove no-js class
+            document.body.classList.remove('no-js');
+            
+            // Create floating leaves
+            createFloatingLeaves();
+            
+            // Quick initialization
+            setTimeout(initPage, 100);
+        });
+
+        function initPage() {
+            // Initialize features
+            initScrollEffects();
+            initNavigation();
+            animateCounters();
+            
+            // Hide loading screen quickly
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.classList.add('hidden');
+            }, 300);
+            
+            // Add animation delays for team cards
+            setTimeout(() => {
+                document.querySelectorAll('.team-card').forEach((item, index) => {
+                    item.style.animationDelay = `${index * 0.1}s`;
+                });
+            }, 200);
+        }
+
+        // ========================
+        // FLOATING LEAVES
+        // ========================
+        function createFloatingLeaves() {
+            const container = document.getElementById('floatingLeaves');
+            const leafCount = 15;
+            
+            for (let i = 0; i < leafCount; i++) {
+                const leaf = document.createElement('div');
+                leaf.classList.add('leaf');
+                
+                // Random properties
+                const size = Math.random() * 30 + 20;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 20 + 15;
+                const delay = Math.random() * 20;
+                
+                leaf.style.width = `${size}px`;
+                leaf.style.height = `${size}px`;
+                leaf.style.left = `${left}%`;
+                leaf.style.animationDuration = `${duration}s`;
+                leaf.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(leaf);
+            }
+        }
+
+        // ========================
+        // SCROLL EFFECTS
+        // ========================
+        function initScrollEffects() {
+            const header = document.querySelector('header');
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                // Header effect
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                // Back to top button
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+                
+                // Animate stats when in view
+                if (window.scrollY > 600) {
+                    initStatsAnimation();
+                }
+            }, { passive: true });
+            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // ========================
+        // NAVIGATION
+        // ========================
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.navbar a');
+            const currentPage = window.location.pathname.split('/').pop();
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                
+                if (linkPage === currentPage || 
+                    (currentPage === 'team.html' && link.getAttribute('href').includes('team'))) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // ========================
+        // ANIMATE COUNTERS
+        // ========================
+        function animateCounters() {
+            // Team stats counters
+            setTimeout(() => {
+                initStatsAnimation();
+            }, 800);
+        }
+
+        function initStatsAnimation() {
+            const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+            
+            statNumbers.forEach(stat => {
+                if (!stat.hasAttribute('data-animated')) {
+                    const target = parseInt(stat.getAttribute('data-count')) || 0;
+                    animateCounter(stat, target, 1200);
+                    stat.setAttribute('data-animated', 'true');
+                }
+            });
+        }
+
+        function animateCounter(element, target, duration) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = formatNumber(target);
+                    clearInterval(timer);
+                } else {
+                    element.textContent = formatNumber(Math.floor(start));
+                }
+            }, 16);
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(0) + 'K';
+            }
+            return num.toString();
+        }
+
+        // ========================
+        // LAZY LOADING
+        // ========================
+        function initLazyLoading() {
+            const images = document.querySelectorAll('.lazy-image');
+            
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
+                        }
+                    });
+                }, { rootMargin: '50px' });
+                
+                images.forEach(img => observer.observe(img));
+            } else {
+                // Fallback for older browsers
+                images.forEach(img => img.classList.add('loaded'));
+            }
+        }
+
+        // Initialize lazy loading
+        setTimeout(initLazyLoading, 500);
+
+        // ========================
+        // ERROR HANDLING
+        // ========================
+        window.addEventListener('error', function(e) {
+            console.error('Error:', e.message);
+            
+            // Handle image errors
+            if (e.target.tagName === 'IMG') {
+                e.target.style.opacity = '0';
+                setTimeout(() => {
+                    const parent = e.target.parentElement;
+                    if (parent && parent.classList.contains('team-photo')) {
+                        parent.innerHTML = '<div style="background: rgba(42, 92, 57, 0.1); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #b8e6b8; font-size: 0.9rem;"><i class="fas fa-user" style="font-size: 2rem;"></i></div>';
+                    }
+                }, 100);
+            }
+        }, true);
+    </script>
+</body>
+</html>

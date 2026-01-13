@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical"
+    href="[https://forestkeepers.free.nf/](https://forestkeepers.free.nf/contact.html/)"/>
+    <title>Contact Us - Forest Keepers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ========================
+           VARIABLES FOR CONSISTENT THEME
+        ======================== */
+        :root {
+          --primary-green: #2a5c39;
+          --secondary-green: #4caf50;
+          --accent-green: #8bc34a;
+          --dark-bg: #0a1a0a;
+          --light-bg: #f8fff8;
+          --text-light: #ffffff;
+          --text-dark: #1a2c1a;
+          --shadow-color: rgba(42, 92, 57, 0.3);
+          --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+          --border-radius: 16px;
+          --container-padding: 20px;
+        }
+
+        /* ========================
+           RESET & BASE
+        ======================== */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        /* ========================
+           ENHANCED HEADER
+        ======================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(10, 26, 10, 0.95) 0%, transparent 100%);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(76, 175, 80, 0.1);
+        }
+
+        header.scrolled {
+            background: rgba(10, 26, 10, 0.98);
+            padding: 15px 100px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 2.2em;
+            background: linear-gradient(45deg, #fff, #4caf50);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+            letter-spacing: 1px;
+            position: relative;
+            user-select: none;
+        }
+
+        .logo::after {
+            content: '🌿';
+            margin-left: 10px;
+            font-size: 1.5em;
+        }
+
+        .navbar a {
+            position: relative;
+            font-size: 1.1em;
+            color: var(--text-light);
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            transition: var(--transition);
+            border-radius: 25px;
+        }
+
+        .navbar a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--secondary-green), transparent);
+            transition: var(--transition);
+        }
+
+        .navbar a:hover::before {
+            width: 100%;
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            color: var(--accent-green);
+        }
+
+        /* ========================
+           ENHANCED HERO SECTION
+        ======================== */
+        .contact-hero {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('Assets/lush-forest-canopy-view-from.jpg') no-repeat center / cover;
+            background-attachment: fixed;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 3.5em;
+            font-weight: 800;
+            background: linear-gradient(45deg, #fff, var(--accent-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-description {
+            font-size: 1.2em;
+            color: var(--text-light);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* ========================
+           CONTACT SECTION
+        ======================== */
+        .contact-section {
+            padding: 80px 20px;
+            background: var(--dark-bg);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h1 {
+            font-size: 3em;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--accent-green);
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        /* ========================
+           CONTACT GRID
+        ======================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* ========================
+           CONTACT CARD STYLES (ENHANCED)
+        ======================== */
+        .contact-card {
+            background: linear-gradient(145deg, rgba(42, 92, 57, 0.1), rgba(10, 26, 10, 0.8));
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-green));
+        }
+
+        .contact-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: var(--accent-green);
+            box-shadow: 0 30px 60px var(--shadow-color);
+            background: linear-gradient(145deg, rgba(42, 92, 57, 0.15), rgba(10, 26, 10, 0.85));
+        }
+
+        .contact-card i {
+            font-size: 3rem;
+            color: var(--accent-green);
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover i {
+            transform: scale(1.2);
+            color: var(--secondary-green);
+        }
+
+        .contact-card h3 {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .contact-card p {
+            font-size: 1.1rem;
+            color: #b8e6b8;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* Khusus untuk card lokasi */
+        .contact-card.location-card p {
+            font-size: 1rem;
+        }
+
+        /* ========================
+           ENHANCED FOOTER
+        ======================== */
+        .footer-section {
+            background: linear-gradient(180deg, #0a290a 0%, #051d05 100%);
+            color: #fff;
+            padding: 60px 0 20px;
+            position: relative;
+            overflow: hidden;
+            border-top: 3px solid #2a5c39;
+            margin-top: 80px;
+        }
+
+        .footer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2a5c39, transparent);
+        }
+
+        .footer-section::after {
+            content: '🌿';
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 2rem;
+            opacity: 0.1;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin: 20px 0;
+            color: #b8e6b8;
+        }
+
+        .footer-copyright p {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .footer-copyright a {
+            color: var(--accent-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-copyright a:hover {
+            color: var(--secondary-green);
+            text-decoration: underline;
+        }
+
+        /* ========================
+           BACK TO TOP BUTTON
+        ======================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px var(--shadow-color);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        /* ========================
+           CUSTOM SCROLLBAR
+        ======================== */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary-green), var(--secondary-green));
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--secondary-green), var(--accent-green));
+        }
+
+        /* ========================
+           RESPONSIVE DESIGN
+        ======================== */
+
+        /* Responsive untuk Tablet (1024px) */
+        @media (max-width: 1024px) {
+            header {
+                padding: 20px 5%;
+            }
+            
+            .hero-title {
+                font-size: 2.8em;
+            }
+            
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-card {
+                padding: 30px 20px;
+            }
+            
+            .contact-card i {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Responsive untuk Mobile (768px) */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 20px;
+                position: relative;
+            }
+            
+            header.scrolled {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 1.8em;
+            }
+            
+            .navbar {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .navbar a {
+                margin: 0 5px;
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            
+            .hero-title {
+                font-size: 2.2em;
+            }
+            
+            .hero-description {
+                font-size: 1em;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .section-header h1 {
+                font-size: 2.2em;
+            }
+            
+            .contact-card {
+                padding: 35px 25px;
+            }
+            
+            .contact-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .contact-card p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Responsive untuk Mobile Kecil (480px) */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8em;
+            }
+            
+            .section-header h1 {
+                font-size: 1.8em;
+            }
+            
+            .contact-card {
+                padding: 30px 20px;
+            }
+            
+            .contact-card i {
+                font-size: 2rem;
+            }
+            
+            .contact-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .contact-card p {
+                font-size: 0.95rem;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            .footer-section {
+                padding: 40px 0 20px;
+            }
+        }
+
+        /* ========================
+           ANIMATIONS
+        ======================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .contact-card:nth-child(1) { animation-delay: 0.1s; }
+        .contact-card:nth-child(2) { animation-delay: 0.2s; }
+        .contact-card:nth-child(3) { animation-delay: 0.3s; }
+        .contact-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h2 class="logo">Forest Keepers</h2>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="team.html">Our Team</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Hubungi Kami</h1>
+            <p class="hero-description">Mari berkolaborasi untuk menjaga kelestarian alam Indonesia.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="section-header">
+                <h1>Mari Terhubung</h1>
+                <p>Tersedia berbagai cara untuk menghubungi kami</p>
+            </div>
+            
+            <div class="contact-grid">
+                <a href="mailto:humas@itpln.ac.id" class="contact-card">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>humas@itpln.ac.id</p>
+                </a>
+
+                <a href="https://wa.me/6285172467394" target="_blank" class="contact-card">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <h3>WhatsApp</h3>
+                    <p>085172467394</p>
+                </a>
+
+                <a href="https://www.instagram.com/itpln/" target="_blank" class="contact-card">
+                    <i class="fa-brands fa-instagram"></i>
+                    <h3>Instagram</h3>
+                    <p>@itpln</p>
+                </a>
+
+                <div class="contact-card location-card">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h3>Lokasi</h3>
+                    <p>Menara PLN, Jl. Lkr. Luar Barat, Duri Kosambi, Kecamatan Cengkareng, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11750</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-content">
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>© Copyright - <a href="https://itpln.ac.id/">Institut Teknologi PLN</a> 2026.</p>
+                    <p>Dibuat dengan ❤️ untuk Indonesia</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // ========================
+        // SCROLL EFFECTS
+        // ========================
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                // Header effect
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                // Back to top button
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            }, { passive: true });
+            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // ========================
+            // NAVIGATION ACTIVE STATE
+            // ========================
+            const navLinks = document.querySelectorAll('.navbar a');
+            const currentPage = window.location.pathname.split('/').pop();
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                
+                if (linkPage === currentPage || 
+                    (currentPage === 'contact.html' && link.getAttribute('href').includes('contact'))) {
+                    link.classList.add('active');
+                }
+            });
+
+            // ========================
+            // ANIMATE CARDS ON SCROLL
+            // ========================
+            const animateCardsOnScroll = () => {
+                const cards = document.querySelectorAll('.contact-card');
+                const windowHeight = window.innerHeight;
+                
+                cards.forEach(card => {
+                    const cardPosition = card.getBoundingClientRect().top;
+                    
+                    if (cardPosition < windowHeight - 100) {
+                        card.style.animationPlayState = 'running';
+                    }
+                });
+            };
+
+            // Initial animation
+            setTimeout(() => {
+                animateCardsOnScroll();
+            }, 300);
+
+            // Animate on scroll
+            window.addEventListener('scroll', animateCardsOnScroll);
+        });
+    </script>
+</body>
+</html>

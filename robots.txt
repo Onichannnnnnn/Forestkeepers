@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /config/
+Disallow: /admin/
+Sitemap: [https://forestkeepers.free.nf/sitemap.xml](https://forestkeepers.free.nf/sitemap.xml)
