@@ -534,7 +534,7 @@ header.scrolled {
 }
 
 /* ========================
-   PETA SECTION YANG DIPERBAIKI
+   PETA SECTION (BASE)
    ======================== */
 .peta-section {
     padding: 100px 0;
@@ -600,11 +600,13 @@ header.scrolled {
     flex-wrap: wrap;
 }
 
+/* REVISI UTAMA: Menggunakan koordinat persentase untuk responsivitas */
 .map {
     position: relative;
     width: 100%;
     max-width: 800px;
-    height: 450px;
+    aspect-ratio: 16 / 9; /* Memberikan rasio tetap agar pulau tidak bergeser */
+    height: auto;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
@@ -614,19 +616,6 @@ header.scrolled {
     min-width: 300px;
 }
 
-.map::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 30% 40%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 70% 60%, rgba(139, 195, 74, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-}
-
 .map img {
     position: absolute;
     cursor: pointer;
@@ -634,13 +623,13 @@ header.scrolled {
     filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
 }
 
-/* Map Positions */
-.sum { width: 280px; top: 110px; left: 30px; }
-.kal { width: 240px; top: 70px; left: 220px; }
-.jawa { width: 360px; top: 220px; left: 250px; }
-.sul { width: 230px; top: 110px; left: 380px; }
-.ntt { width: 180px; top: 150px; left: 500px; }
-.papua { width: 320px; top: 170px; left: 560px; }
+/* Desktop Island Positions (Base) */
+.sum   { width: 35%; top: 24%; left: 4%; }
+.kal   { width: 30%; top: 15%; left: 28%; }
+.jawa  { width: 45%; top: 48%; left: 31%; }
+.sul   { width: 28%; top: 24%; left: 47%; }
+.ntt   { width: 22%; top: 33%; left: 62%; }
+.papua { width: 40%; top: 37%; left: 70%; }
 
 .map img:hover {
     filter: drop-shadow(0 0 20px rgba(76, 175, 80, 0.7)) brightness(1.2);
@@ -1534,81 +1523,10 @@ header.scrolled {
 }
 
 /* ========================
-   PULSE ANIMATION
-   ======================== */
-@keyframes pulse {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
-    }
-}
-
-.pulse {
-    animation: pulse 2s infinite;
-}
-
-/* ========================
-   RAIN EFFECT
-   ======================== */
-.raindrop {
-    position: absolute;
-    width: 1px;
-    height: 20px;
-    background: linear-gradient(transparent, rgba(76, 175, 80, 0.6));
-    animation: rain 0.5s linear infinite;
-}
-
-@keyframes rain {
-    0% {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh);
-        opacity: 0;
-    }
-}
-
-/* ========================
-   TEXT GLOW EFFECT
-   ======================== */
-.text-glow {
-    text-shadow: 
-        0 0 10px rgba(76, 175, 80, 0.5),
-        0 0 20px rgba(76, 175, 80, 0.3),
-        0 0 30px rgba(76, 175, 80, 0.1);
-}
-
-/* ========================
-   INTERACTIVE HOVER EFFECT
-   ======================== */
-.interactive-hover {
-    transition: var(--transition);
-}
-
-.interactive-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px var(--shadow-color);
-}
-
-/* Hover effect khusus untuk peta */
-.map img.interactive-hover:hover {
-    transform: scale(1.08) translateY(-5px) !important;
-}
-
-/* ========================
-   RESPONSIVE DESIGN - UMUM
+   RESPONSIVE DESIGN (REVISED PETA ONLY)
    ======================== */
 
-/* Responsive untuk Tablet (1024px) */
+/* Responsive Tablet */
 @media (max-width: 1024px) {
     header {
         padding: 20px 5%;
@@ -1622,23 +1540,22 @@ header.scrolled {
         grid-template-columns: repeat(2, 1fr);
     }
     
+    /* REVISI PETA TABLET */
     .map-wrapper {
         flex-direction: column;
+        align-items: center;
     }
     
     .map {
-        height: 400px;
+        max-width: 95%;
+        aspect-ratio: 16/9;
+    }
+
+    .map-legend {
+        width: 100%;
+        max-width: 600px;
     }
     
-    /* Adjust map positions for tablet */
-    .sum { width: 240px; top: 90px; left: 20px; }
-    .kal { width: 200px; top: 50px; left: 180px; }
-    .jawa { width: 300px; top: 180px; left: 200px; }
-    .sul { width: 190px; top: 90px; left: 320px; }
-    .ntt { width: 150px; top: 120px; left: 420px; }
-    .papua { width: 270px; top: 140px; left: 470px; }
-    
-    /* Footer Responsive */
     .footer-main {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -1647,33 +1564,15 @@ header.scrolled {
     .footer-links {
         grid-template-columns: repeat(2, 1fr);
     }
-    
-    .footer-logo-section {
-        text-align: center;
-        padding-right: 0;
-    }
-    
-    .footer-tagline {
-        max-width: 100%;
-        margin: 0 auto 25px;
-    }
-    
-    .social-links {
-        justify-content: center;
-    }
 }
 
-/* Responsive untuk Mobile (768px) */
+/* Responsive Mobile */
 @media (max-width: 768px) {
     header {
         padding: 20px;
         flex-direction: column;
         gap: 20px;
         position: relative;
-    }
-    
-    header.scrolled {
-        padding: 15px 20px;
     }
     
     .logo {
@@ -1687,27 +1586,26 @@ header.scrolled {
         gap: 10px;
     }
     
-    .navbar a {
-        margin: 0 5px;
-        padding: 8px 15px;
-        font-size: 0.9em;
-    }
-    
     .hero-title, #text {
         font-size: 2.2em;
     }
     
-    .hero-description {
-        font-size: 1em;
-    }
-    
     .sec {
-        margin-top: -20px;
-        padding: 60px 40px;
+        padding: 60px 20px;
     }
     
-    .sec h2 {
-        font-size: 2.2em;
+    /* REVISI PETA MOBILE */
+    .map {
+        max-width: 100%;
+        border-width: 1px;
+    }
+
+    .peta {
+        padding: 40px 15px;
+    }
+
+    .judul h2 {
+        font-size: 2em;
     }
     
     .stats-container {
@@ -1717,19 +1615,6 @@ header.scrolled {
     .pulau-grid {
         grid-template-columns: 1fr;
     }
-    
-    .map {
-        height: 350px;
-        max-width: 100%;
-    }
-    
-    /* Adjust map positions for mobile */
-    .sum { width: 180px; top: 70px; left: 10px; }
-    .kal { width: 130px; top: 40px; left: 140px; }
-    .jawa { width: 220px; top: 140px; left: 150px; }
-    .sul { width: 100px; top: 70px; left: 260px; }
-    .ntt { width: 110px; top: 90px; left: 320px; }
-    .papua { width: 200px; top: 100px; left: 360px; }
     
     /* Slider Responsive */
     .container {
@@ -1741,47 +1626,10 @@ header.scrolled {
         left: 30px;
         width: 85%;
         padding: 20px;
-        background: rgba(10, 26, 10, 0.6);
-    }
-    
-    .content .name {
-        font-size: 2em;
-    }
-    
-    .content .des {
-        font-size: 14px;
-        padding: 15px;
-        max-height: 150px;
-    }
-    
-    .slide .item:nth-child(n + 4) {
-        display: none;
-    }
-    
-    /* Footer Responsive */
-    .footer-links {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .footer-partners {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-    
-    .partner-logos {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .footer-legal {
-        flex-direction: column;
-        gap: 10px;
     }
 }
 
-/* Responsive untuk Mobile Kecil (480px) */
+/* Responsive Mobile Kecil */
 @media (max-width: 480px) {
     .hero-title, #text {
         font-size: 1.8em;
@@ -1791,75 +1639,18 @@ header.scrolled {
         grid-template-columns: 1fr;
     }
     
-    .stat-number {
-        font-size: 2.5em;
-    }
-    
+    /* REVISI PETA MOBILE KECIL */
     .map {
-        height: 300px;
+        border-radius: 8px;
     }
-    
-    .sum { width: 150px; top: 60px; left: 5px; }
-    .kal { width: 120px; top: 30px; left: 110px; }
-    .jawa { width: 180px; top: 120px; left: 120px; }
-    .sul { width: 110px; top: 60px; left: 200px; }
-    .ntt { width: 90px; top: 75px; left: 260px; }
-    .papua { width: 160px; top: 85px; left: 290px; }
-    
-    .peta-info p {
-        font-size: 1em;
-    }
-    
-    .peta-stats {
-        flex-direction: column;
-        align-items: center;
-    }
-    
+
     .stat-box {
         width: 100%;
-        max-width: 200px;
         justify-content: center;
     }
     
-    .footer-section {
-        padding: 40px 0 20px;
-    }
-    
-    .footer-logo {
-        font-size: 1.8rem;
-        justify-content: center;
-    }
-    
-    .link-column h3 {
-        font-size: 1.1rem;
-    }
-    
-    .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
+    .footer-legal {
+        flex-direction: column;
+        gap: 10px;
     }
 }
-
-/* ========================
-   ANIMATIONS
-   ======================== */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.footer-content > * {
-    animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.footer-logo-section { animation-delay: 0.1s; }
-.footer-links { animation-delay: 0.2s; }
-.footer-bottom { animation-delay: 0.3s; }
